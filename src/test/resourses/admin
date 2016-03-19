@@ -1,0 +1,6 @@
+<permissions>
+    <permission case ="positive">isSomeBlockIsDisplayed</permission>
+    <permission case ="positive">isSomeButtonDisplayed</permission>
+    <permission case ="positive">canDeleteUser</permission>
+    <permission case ="positive">canAddUser</permission>
+</permissions>
