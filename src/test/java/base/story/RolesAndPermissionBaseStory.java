@@ -3,7 +3,7 @@ package base.story;
 import javafx.util.Pair;
 import org.junit.Assert;
 import org.junit.runners.Parameterized;
-import steps.UserSteps;
+import steps.RolePrivileges;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -13,15 +13,17 @@ public class RolesAndPermissionBaseStory {
     @Parameterized.Parameter
     public CustomerRole role;
 
-    UserSteps userSteps;
+    RolePrivileges userSteps;
 
     public void verifyRolePermissions() {
-        List<Pair<String, Boolean>> list = getMethodsFromXml();
-        checkTestMethod(list);
+        List<Pair<String, Boolean>> permissions = getMethodsFromXml();
+        checkTestMethod(permissions);
     }
-
-    public void checkTestMethod(List<Pair<String, Boolean>> list) {
-        for (Pair entry : list) {
+    public List<Pair<String, Boolean>> getMethodsFromXml() {
+        return role.getPermissionsList();
+    }
+    public void checkTestMethod(List<Pair<String, Boolean>> permissions) {
+        for (Pair entry : permissions) {
             Boolean methodResult = runMethod((String) entry.getKey());
             if (entry.getValue().toString().equals("true")) {
                 Assert.assertTrue(entry.getKey() + " positive test method was not finished successfully for "
@@ -32,7 +34,7 @@ public class RolesAndPermissionBaseStory {
     }
     public Boolean runMethod(String methodName) {
         Boolean result = null;
-        Class c = UserSteps.class;
+        Class c = RolePrivileges.class;
         Method[] methods = c.getMethods();
         for (Method method : methods) {
             if (method.getName().equalsIgnoreCase(methodName)) {
@@ -41,9 +43,5 @@ public class RolesAndPermissionBaseStory {
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     e.printStackTrace();}}}
         return result;
-    }
-
-    public List<Pair<String, Boolean>> getMethodsFromXml() {
-        return role.getPermissionsList();
     }
 }
