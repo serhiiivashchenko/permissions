@@ -15,9 +15,9 @@ import static org.joox.JOOX.$;
 
 public enum CustomerRole {
 
-    ADMINISTRATOR("resources/admin.xml"),
-    WRITER("resources/writer.xml"),
-    USER("resources/user.xml");
+    ADMINISTRATOR("permission/admin.xml"),
+    WRITER("permission/writer.xml"),
+    USER("permission/user.xml");
 
     private String initXml;
 
