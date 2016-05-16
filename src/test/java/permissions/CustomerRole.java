@@ -1,4 +1,4 @@
-package base.story;
+package permissions;
 
 import javafx.util.Pair;
 import org.joox.Match;
